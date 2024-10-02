@@ -23,9 +23,8 @@ const position = (function () {
   return { get, set }
 })()
 
-
 function positionSetCallBack (oldArr, newArr) {   // Executes when position changes
-  console.log(position.get())
+  console.log(newArr)
   gridUI.moveBlock(oldArr, newArr)
 }
 block.newBlock = function () {
@@ -45,7 +44,13 @@ function translateRight (arr) {
 }
 
 function translateRotate (arr) {
-  return arr.map(([row, col]) => [col - 1, 1 - row])
+  let [refRow, refCol]= arr[1]               //  Sets the second field in array as rotation point
+  const newArr = arr.map(([row, col]) => {
+    let newRow = refRow - (refCol - col)
+    let newCol = refCol + (refRow - row)     
+    return [newRow, newCol]
+  })
+  return newArr
 }
 
 function translateMid (arr) {   // Todo: Fetch grid width and incorporate in function

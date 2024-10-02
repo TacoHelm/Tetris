@@ -22,7 +22,7 @@ export class Grid {
   testEmpty (arr) {
     let result = true
     arr.forEach(([row, col]) => {
-      if (this.fields[row][col] !== 'empty') result = false
+      if (this.fields[row][col] === 'border' || this.fields[row][col] === 'block') result = false
     })
     return result
   }
