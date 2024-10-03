@@ -3,12 +3,12 @@ import { grid } from '.'
 
 const fields = []
 const gridUI = {}
+const main = document.querySelector('.main')
+const gridContainer = newDiv(main, ['grid-container'])
 
 
 
-gridUI.init = function () {
-  const main = document.querySelector('.main')
-  const gridContainer = newDiv(main, ['grid-container'])
+gridUI.init = function () { 
   const data = grid.getFields()
   for (let row = 0; row < data.length; row++){
     fields.push([])
@@ -31,6 +31,15 @@ gridUI.settleBlock = function (arr){
     fields[row][col].classList.add('block')
     fields[row][col].classList.remove('active', 'empty')
   })
+}
+gridUI.redraw = function () {
+  const data = grid.getFields()
+  for (let row = 0; row < data.length; row++){
+    for (let col = 0; col < data[0].length; col++){
+      fields[row][col].classList.remove(...fields[row][col].classList)
+      fields[row][col].classList.add('field', data[row][col])
+    }
+  }
 }
 
 

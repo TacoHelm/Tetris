@@ -24,7 +24,6 @@ const position = (function () {
 })()
 
 function positionSetCallBack (oldArr, newArr) {   // Executes when position changes
-  console.log(newArr)
   gridUI.moveBlock(oldArr, newArr)
 }
 block.newBlock = function () {
@@ -74,12 +73,12 @@ block.rotate = function () {
 }
 
 function downInterval () {
-  block.moveDown()
   const newPos = translateDown(position.get())
   if (grid.testEmpty(newPos) === false) {
     grid.settleBlock(position.get())
     block.newBlock()
   }
+  block.moveDown()
 }
 
 block.start = function () {

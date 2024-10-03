@@ -36,5 +36,27 @@ export class Grid {
       this.fields[row][col] = 'block'
     })  
     gridUI.settleBlock(arr)
+    this.checkFullRows()
+  }
+
+  checkFullRows() {
+    this.fields.forEach((row, index) => {
+      let noEmpty = true;
+      let containsBlock = false;
+      for (const field of row){
+        if (field === 'empty') noEmpty = false
+        if (field === 'block') containsBlock = true        
+      }
+      if (noEmpty === true && containsBlock === true) this.clearRow(index)     
+    })
+  }
+
+  clearRow(index) {   
+    for (let row = index; row > 0; row--){
+      for (let col = 0; col < this.fields[row].length; col++){
+        this.fields[row][col] = this.fields[(row - 1)][col]
+      }
+    }
+    gridUI.redraw()
   }
 }
