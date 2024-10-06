@@ -19,6 +19,7 @@ position.set = function (newArr, setOldEmpty) {
       pos.push(element)
     })
   }
+  if (grid.testEmpty(newArr) === false) return false
 }
 
 export { position }

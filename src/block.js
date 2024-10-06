@@ -1,11 +1,13 @@
 import { getRandom } from './allblocks'
 import { grid } from './grid'
 import { position } from './blockPosArray'
+import { game } from './game'
 
 const block = {}
 
 block.newBlock = function () {
-  position.set(translateMid(getRandom()), false)
+  const attempt = position.set(translateMid(getRandom()), false)
+  if (attempt === false) game.end()
 }
 
 function translateDown (arr) {
@@ -50,17 +52,13 @@ block.rotate = function () {
   position.set(translateRotate(position.get()), true)
 }
 
-function downInterval () {
+block.downInterval = function () {
   const newPos = translateDown(position.get())
   if (grid.testEmpty(newPos) === false) {
     grid.settleBlock(position.get())
     block.newBlock()
   }
   block.moveDown()
-}
-
-block.start = function () {
-  setInterval(downInterval, 400)
 }
 
 export { block }
