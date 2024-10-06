@@ -11,4 +11,4 @@ keyboard.init()
 block.newBlock()
 block.start()
 
-export { grid }
+

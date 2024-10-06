@@ -1,32 +1,11 @@
 import { getRandom } from './allblocks'
-import { gridUI } from './gridUI'
-import { grid } from './index'
+import { grid } from './grid'
+import { position } from './blockPosArray'
 
 const block = {}
-const position = (function () {
-  const pos = []
-  function get () {
-    return pos
-  }
-  function set (newArr) {
-    if (grid.testEmpty(newArr) === true) {
-      positionSetCallBack(pos, newArr)
-      while (pos.length > 0) {
-        pos.pop()
-      }
-      newArr.forEach(element => {
-        pos.push(element)
-      })
-    }
-  }
-  return { get, set }
-})()
 
-function positionSetCallBack (oldArr, newArr) { // Executes when position changes
-  gridUI.moveBlock(oldArr, newArr)
-}
 block.newBlock = function () {
-  position.set(translateMid(getRandom()))
+  position.set(translateMid(getRandom()), false)
 }
 
 function translateDown (arr) {
@@ -56,19 +35,19 @@ function translateMid (arr) { // Todo: Fetch grid width and incorporate in funct
 }
 
 block.moveDown = function () {
-  position.set(translateDown(position.get()))
+  position.set(translateDown(position.get()), true)
 }
 
 block.moveLeft = function () {
-  position.set(translateLeft(position.get()))
+  position.set(translateLeft(position.get()), true)
 }
 
 block.moveRight = function () {
-  position.set(translateRight(position.get()))
+  position.set(translateRight(position.get()), true)
 }
 
 block.rotate = function () {
-  position.set(translateRotate(position.get()))
+  position.set(translateRotate(position.get()), true)
 }
 
 function downInterval () {
