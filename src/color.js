@@ -1,5 +1,5 @@
 const color = {}
-const colors = ['red', 'blue', 'green', 'purple', 'orange', 'pink']
+const colors = ['red', 'blue', 'green', 'pink', 'orange', 'purple']
 let index = 0
 
 color.get = function () {
@@ -7,7 +7,8 @@ color.get = function () {
 }
 
 color.change = function () {
-  index = Math.floor(Math.random() * colors.length)
+  index ++
+  if (index >= colors.length) index = 0
 }
 
 export { color }
