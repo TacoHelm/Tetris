@@ -1,6 +1,7 @@
 import { gridArray } from './gridArray'
 import { gridUI } from './gridUI'
 import { score } from './score'
+import { color } from './color'
 
 const grid = {}
 
@@ -11,8 +12,8 @@ grid.testEmpty = function (arr) {
     if (row < 0) { // Prevents rotation of black outside of grid
       result = false
       return
-    }  
-    if (fields[row][col] === 'border' || fields[row][col] === 'block') result = false
+    }
+    if (fields[row][col] !== 'empty') result = false
   })
   return result
 }
@@ -21,7 +22,7 @@ grid.getFields = function () {
 }
 
 grid.settleBlock = function (arr) {
-  gridArray.set(arr, 'block')
+  gridArray.set(arr, color.get())
   checkFullRows()
 }
 
@@ -29,12 +30,12 @@ function checkFullRows () {
   const fields = gridArray.get()
   fields.forEach((row, index) => {
     let noEmpty = true
-    let containsBlock = false
+    let borders = 0
     for (const field of row) {
       if (field === 'empty') noEmpty = false
-      if (field === 'block') containsBlock = true
+      if (field === 'border') borders++
     }
-    if (noEmpty === true && containsBlock === true) clearRow(index)
+    if (noEmpty === true && borders < 3) clearRow(index)
   })
 }
 

@@ -1,8 +1,8 @@
 import { gridUI } from './gridUI'
 
 const fields = []
-const rows = 26
-const cols = 15
+const rows = 20
+const cols = 12
 const gridArray = {}
 
 gridArray.init = function () {

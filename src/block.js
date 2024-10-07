@@ -2,11 +2,13 @@ import { getRandom } from './allblocks'
 import { grid } from './grid'
 import { position } from './blockPosArray'
 import { game } from './game'
+import { color } from './color'
 
 const block = {}
 
 block.newBlock = function () {
-  const attempt = position.set(getRandom().map(([row, col]) => [row, col + 6]), false)  // False prevents the fields of settled block to get class empty
+  color.change()
+  const attempt = position.set(getRandom().map(([row, col]) => [row, col + 6]), false) // False prevents the fields of settled block to get class empty
   if (attempt === false) game.end()
 }
 
@@ -24,7 +26,7 @@ block.moveRight = function () {
 
 block.rotate = function () {
   const pos = position.get()
-  let [refRow, refCol] = pos[1] // Prevents rotation of black outside of grid
+  const [refRow, refCol] = pos[1] // Prevents rotation of black outside of grid
   position.set(pos.map(([row, col]) => [(refRow - (refCol - col)), (refCol + (refRow - row))]))
 }
 

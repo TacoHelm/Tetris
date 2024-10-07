@@ -1,6 +1,4 @@
-import { newDiv } from "./DOMhelper"
-
-let scoreUI = {}
+const scoreUI = {}
 
 scoreUI.display = function (score) {
   const scoreDiv = document.querySelector('.score')
