@@ -1,5 +1,6 @@
 import { gridArray } from './gridArray'
 import { gridUI } from './gridUI'
+import { score } from './score'
 
 const grid = {}
 
@@ -38,6 +39,7 @@ function checkFullRows () {
 }
 
 function clearRow (index) {
+  score.add()
   const fields = gridArray.get()
   for (let row = index; row > 0; row--) {
     for (let col = 0; col < fields[row].length; col++) {
