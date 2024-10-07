@@ -9,8 +9,8 @@ game.start = function (){
 }
 
 game.end = function (){
-  clearInterval(timer)
   console.log('End')
+  clearInterval(timer)
 }
 
 export { game }

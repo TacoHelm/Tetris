@@ -7,6 +7,10 @@ grid.testEmpty = function (arr) {
   let result = true
   const fields = gridArray.get()
   arr.forEach(([row, col]) => {
+    if (row < 0) { // Prevents rotation of black outside of grid
+      result = false
+      return
+    }  
     if (fields[row][col] === 'border' || fields[row][col] === 'block') result = false
   })
   return result

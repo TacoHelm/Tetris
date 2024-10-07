@@ -10,14 +10,10 @@ position.get = function () {
 
 position.set = function (newArr, setOldEmpty) {
   if (grid.testEmpty(newArr) === true) {
-    if (setOldEmpty === true) gridUI.setArray(pos, 'empty')
+    if (setOldEmpty !== false) gridUI.setArray(pos, 'empty')
     gridUI.setArray(newArr, 'active')
-    while (pos.length > 0) {
-      pos.pop()
-    }
-    newArr.forEach(element => {
-      pos.push(element)
-    })
+    pos.splice(0, pos.length)
+    newArr.forEach(element => pos.push(element))
   }
   if (grid.testEmpty(newArr) === false) return false
 }
